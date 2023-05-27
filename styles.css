@@ -1,1 +1,30 @@
 /*  your css code here. If applicable */
+/*  your css code here. If applicable */
+.vid-container {
+  width: 100%;
+  height: 300px;
+  background: #000;
+}
+
+.player-container {
+  display: none;
+}
+
+.sound-picker {
+  text-align: center;
+}
+
+.time-display {
+  font-size: 24px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.play {
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin: 20px auto;
+  background: url(play.png) center no-repeat;
+  background-size: contain;
+}
