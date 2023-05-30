@@ -1,37 +1,34 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-	<link rel="stylesheet" href="styles.css">
+	<title>Meditation App</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
 	<div id="app">
-  <div class="vid-container">
-    <video id="meditation-video" src="video/beach.mp4" loop autoplay muted></video>
-  </div>
-  <div class="player-container">
-    <audio id="meditation-audio" src="sounds/beach.mp3" loop></audio>
-    <audio id="meditation-audio-2" src="sounds/rain.mp3" loop></audio>
-  </div>
-  <div class="sound-picker">
-    <button id="audio-1">Beach Sound</button>
-    <button id="audio-2">Rain Sound</button>
-  </div>
-  <div id="time-select">
-    <button id="smaller-mins">2 min</button>
-    <button id="medium-mins">5 min</button>
-    <button id="long-mins">10 min</button>
-  </div>
-  <div class="time-display">10:00</div>
-  <button class="play"></button>
-</div>
-
-    <script type="text/javascript" src="./script.js">
-</script>
-
+		<div class="vid-container">
+			<!-- Video will be rendered here -->
+		</div>
+		<div class="player-container">
+			<audio id="meditation-audio">
+				<source src="Sounds/beach.mp3" type="audio/mpeg">
+			</audio>
+			<audio id="meditation-audio-b">
+				<source src="Sounds/rain.mp3" type="audio/mpeg">
+			</audio>
+			<div class="sound-picker">
+				<button id="audio-a">Sound A</button>
+				<button id="audio-b">Sound B</button>
+			</div>
+			<div id="time-select">
+				<button id="smaller-mins">2 Min</button>
+				<button id="medium-mins">5 Min</button>
+				<button id="long-mins">10 Min</button>
+			</div>
+			<div class="time-display">10:00</div>
+			<button class="play"></button>
+		</div>
+	</div>
+	<script type="text/javascript" src="script.js"></script>
 </body>
-
 </html>
