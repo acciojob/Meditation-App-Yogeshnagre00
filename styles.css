@@ -1,90 +1,80 @@
 /*  your css code here. If applicable */
-/* Style for video container */
-.vid-container {
-	height: 100%;
-	width: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: -1;
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
 }
-
-/* Style for player container */
+.app {
+height: 100vh;
+display: flex;
+justify-content: space-evenly;
+align-items: center;
+}
+.time-select,
+.sound-picker,
 .player-container {
-	display: none;
+height: 80%;
+flex: 1;
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
+align-items: center;
 }
-
-/* Style for sound picker container */
-.sound-picker {
-	display: flex;
-	justify-content: center;
-	margin-top: 20px;
+.player-container {
+position: relative;
 }
-
-/* Style for active sound button */
-.active {
-	background-color: #ccc;
+.player-container svg {
+position: absolute;
+height: 50%;
+transform: rotate(-90deg);
+pointer-events: none;
 }
-
-/* Style for time select container */
-#time-select {
-	display: flex;
-	justify-content: center;
-	margin-top: 20px;
-}
-
-/* Style for time button */
-#time-select button {
-	padding: 10px;
-	margin: 0 10px;
-	border: none;
-	border-radius: 5px;
-	background-color: #ccc;
-	color: #fff;
-	cursor: pointer;
-}
-
-/* Style for active time button */
-#time-select button.active {
-	background-color: #333;
-}
-
-/* Style for time display */
 .time-display {
-	font-size: 50px;
-	text-align: center;
-	margin-top: 20px;
+position: absolute;
+bottom: 10%;
+font-size: 50px;
+color: white;
 }
-
-/* Style for play/pause button */
-#play-pause {
-	width: 50px;
-	height: 50px;
-	border: none;
-	border-radius: 50%;
-	background-color: #ccc;
-	cursor: pointer;
+video {
+position: fixed;
+top: 0%;
+left: 0%;
+width: 100%;
+z-index: -10;
 }
-
-/* Style for play icon */
-#play-pause.play::after {
-	content: "";
-	position: absolute;
-	top: 15px;
-	left: 15px;
-	border-top: 15px solid transparent;
-	border-bottom: 15px solid transparent;
-	border-left: 20px solid #fff;
+.time-select button,
+.sound-picker button {
+color: white;
+width: 30%;
+height: 10%;
+background: none;
+border: 2px solid white;
+cursor: pointer;
+border-radius: 5px;
+font-size: 20px;
+transition: all 0.5s ease;
 }
-
-/* Style for pause icon */
-#play-pause.pause::after {
-	content: "";
-	position: absolute;
-	top: 15px;
-	left: 15px;
-	width: 10px;
-	height: 20px;
-	background-color: #fff;
-	border-radius: 2px;
+.time-select button:hover {
+color: black;
+background: white;
+}
+.sound-picker button {
+border: none;
+height: 120px;
+width: 120px;
+border-radius: 50%;
+padding: 30px;
+}
+.sound-picker button:nth-child(1) {
+background: #497281;
+}
+.sound-picker button:nth-child(2) {
+background: #a14f49;
+}
+.sound-picker button img {
+height: 100%;
+}
+.time-select button:focus,
+.sound-picker button:focus {
+outline: 0;
 }
