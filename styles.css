@@ -1,40 +1,90 @@
 /*  your css code here. If applicable */
-body {
-	background-color: #f5f5f5;
-	font-family: Arial, sans-serif;
-	text-align: center;
-}
-
-#app {
-	margin: 0 auto;
-	width: 80%;
-}
-
+/* Style for video container */
 .vid-container {
-	background-color: #fff;
-	height: 400px;
-	margin-bottom: 20px;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
 }
 
+/* Style for player container */
 .player-container {
-	background-color: #fff;
-	padding: 20px;
+	display: none;
 }
 
+/* Style for sound picker container */
 .sound-picker {
-	margin-bottom: 20px;
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
 }
 
-.time-display {
-	font-size: 48px;
-	font-weight: bold;
-	margin: 20px 0;
+/* Style for active sound button */
+.active {
+	background-color: #ccc;
 }
 
-.play {
-	background-image: url('play.png');
-	background-size: cover;
+/* Style for time select container */
+#time-select {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+/* Style for time button */
+#time-select button {
+	padding: 10px;
+	margin: 0 10px;
 	border: none;
-	height: 64px;
-	width: 64px;
+	border-radius: 5px;
+	background-color: #ccc;
+	color: #fff;
+	cursor: pointer;
+}
+
+/* Style for active time button */
+#time-select button.active {
+	background-color: #333;
+}
+
+/* Style for time display */
+.time-display {
+	font-size: 50px;
+	text-align: center;
+	margin-top: 20px;
+}
+
+/* Style for play/pause button */
+#play-pause {
+	width: 50px;
+	height: 50px;
+	border: none;
+	border-radius: 50%;
+	background-color: #ccc;
+	cursor: pointer;
+}
+
+/* Style for play icon */
+#play-pause.play::after {
+	content: "";
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	border-top: 15px solid transparent;
+	border-bottom: 15px solid transparent;
+	border-left: 20px solid #fff;
+}
+
+/* Style for pause icon */
+#play-pause.pause::after {
+	content: "";
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	width: 10px;
+	height: 20px;
+	background-color: #fff;
+	border-radius: 2px;
 }
