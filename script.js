@@ -1,70 +1,99 @@
 //your JS code here. If required.
- const app = () => {
-const song = document.querySelector('.song');
-const play = document.querySelector('.play');
-const outline = document.querySelector('.moving-outline circle');
-const video = document.querySelector('.vid-container video');
-//Sounds
-const sounds = document.querySelectorAll('.sound-picker button');
-//Time Display
+// Get elements from the DOM
+const videoContainer = document.querySelector('.vid-container');
+const video = document.getElementById('video');
+const playerContainer = document.querySelector('.player-container');
+const audio = document.getElementById('audio');
+const soundButtons = document.querySelectorAll('.sound-picker button');
+const timeButtons = document.querySelectorAll('#time-select button');
 const timeDisplay = document.querySelector('.time-display');
-const timeSelect = document.querySelectorAll('.time-select button');
-//Get the length of the outline
-const outlineLength = outline.getTotalLength();
-console.log(outlineLength);
-//Duration
-let fakeDuration = 600;
-outline.style.strokeDasharray = outlineLength;
-outline.style.strokeDashoffset = outlineLength;
-//Pick diff sound
-sounds.forEach(sound => {
-sound.addEventListener('click', function() {
-song.src = this.getAttribute('data-sound');
-video.src = this.getAttribute('data-video');
-checkPlaying(song);
-});
-});
-//play sound
-play.addEventListener('click', () => {
-checkPlaying(song);
-});
-//Select sound
-timeSelect.forEach(option => {
-option.addEventListener('click', function() {
-fakeDuration = this.getAttribute('data-time');
-timeDisplay.textContent = `${Math.floor(fakeDuration / 60)} : ${Math.floor(fakeDuration % 60)}`;
-});
-});
-//Create a function specific to stop and play the sounds
-const checkPlaying = song => {
-if (song.paused) {
-song.play();
-video.play();
-play.src = './svg/pause.svg';
-} else {
-song.pause();
-video.pause();
-play.src = './svg/play.svg';
+const playPauseButton = document.getElementById('play-pause');
+
+let interval;
+let isPlaying = false;
+let selectedTime = 600;
+let selectedSound = 0;
+
+// Play or pause the audio and video
+function togglePlay() {
+    if (isPlaying) {
+        video.pause();
+        audio.pause();
+        clearInterval(interval);
+        playPauseButton.classList.remove('pause');
+        playPauseButton.classList.add('play');
+    } else {
+        video.play();
+        audio.play();
+        interval = setInterval(updateTime, 1000);
+        playPauseButton.classList.remove('play');
+        playPauseButton.classList.add('pause');
+    }
+    isPlaying = !isPlaying;
 }
-};
-//We can animate the circle
-song.ontimeupdate = () => {
-let currentTime = song.currentTime;
-let elasped = fakeDuration - currentTime;
-let seconds = Math.floor(elasped % 60);
-let minutes = Math.floor(elasped / 60);
-console.log(currentTime);
-//Animate the circle
-let progress = outlineLength - (currentTime / fakeDuration) * outlineLength;
-outline.style.strokeDashoffset = progress;
-//Animate the text
-timeDisplay.textContent = `${minutes}:${seconds}`;
-if (currentTime >= fakeDuration) {
-song.pause();
-song.currentTime = 0;
-play.src = './svg/play.svg';
-video.pause();
+
+// Update the time display
+function updateTime() {
+    let minutes = Math.floor(selectedTime / 60);
+    let seconds = selectedTime % 60;
+    if (seconds < 10) {
+        seconds = "0" + seconds;
+    }
+    timeDisplay.innerText = minutes + ":" + seconds;
+    selectedTime--;
+    if (selectedTime < 0) {
+        clearInterval(interval);
+        togglePlay();
+        timeDisplay.innerText = "10:00";
+        selectedTime = 600;
+    }
 }
+
+// Set the selected sound
+function setSound(soundIndex) {
+    selectedSound = soundIndex;
+    audio.src = "sounds/" + (selectedSound === 0 ? "beach.mp3" : "rain.mp3");
 }
-};
-app();
+
+// Set the selected time
+function setTime(timeInSeconds) {
+    selectedTime = timeInSeconds;
+    timeButtons.forEach(button => button.classList.remove('active'));
+    if (selectedTime === 120) {
+        document.getElementById('smaller-mins').classList.add('active');
+    } else if (selectedTime === 300) {
+        document.getElementById('medium-mins').classList.add('active');
+    } else if (selectedTime === 600) {
+        document.getElementById('long-mins').classList.add('active');
+    }
+    timeDisplay.innerText = Math.floor(selectedTime / 60) + ":00";
+}
+
+// Add event listeners
+playPauseButton.addEventListener('click', togglePlay);
+
+soundButtons.forEach((button, index) => {
+    button.addEventListener('click', () => {
+        soundButtons.forEach(button => button.classList.remove('active'));
+        button.classList.add('active');
+        setSound(index);
+    });
+});
+
+timeButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        timeButtons.forEach(button => button.classList.remove('active'));
+        button.classList.add('active');
+        if (button.id === 'smaller-mins') {
+            setTime(120);
+        } else if (button.id === 'medium-mins') {
+            setTime(300);
+        } else if (button.id === 'long-mins') {
+            setTime(600);
+        }
+    });
+});
+
+// Set initial values
+setSound(selectedSound);
+setTime(selectedTime);
